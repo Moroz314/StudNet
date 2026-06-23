@@ -1,0 +1,77 @@
+services:
+  dbps: # ИСПРАВЛЕНО: поменяли 'postgres:' на 'dbps:'
+    image: postgres:latest
+    container_name: psgr
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_DB=studnet
+    volumes:
+      - postgres-data:/var/lib/postgresql
+    ports:
+      - "5432:5432"
+    networks:
+      - stud_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d studnet"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - stud_net
+    depends_on:
+      - dbps # ИСПРАВЛЕНО здесь
+          
+  redis:
+    image: redis:latest
+    container_name: redis_container
+    ports:
+      - "6379:6379"
+    networks:
+      - stud_net
+
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    command: server /data --console-address ":9001"
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    volumes:
+      - minio-data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    networks:
+      - stud_net
+
+  backend:
+    image: studnet_backend
+    container_name: backend_container
+    ports:
+      - "8000:8000"
+    networks:
+      - stud_net
+    depends_on:
+      dbps: # ИСПРАВЛЕНО здесь
+        condition: service_healthy
+      redis:
+        condition: service_started
+    environment:
+      - MAIL_USERNAME=your_email@gmail.com
+      - MAIL_PASSWORD=your_app_password
+      - VERIFICATION_CODE_EXPIRE_MINUTES=10
+
+networks:
+  stud_net:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  minio-data:

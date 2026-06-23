@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@theme {
+  --breakpoint-xs: 475px;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #000;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  font-size: clamp(14px, 2.5vw, 16px);
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Russo One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #000;
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#root {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  img,
+  video,
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@layer components {
+  .page-viewport {
+    @apply flex flex-col min-h-[calc(100dvh-70px)] max-h-[calc(100dvh-70px)] overflow-hidden;
+  }
+
+  .page-scroll {
+    @apply flex-1 min-h-0 overflow-y-auto overflow-x-hidden;
+  }
+}
+
+
