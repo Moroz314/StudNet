@@ -41,7 +41,7 @@ services:
       - stud_net
 
   minio:
-    image: minio/minio:latest
+    image: quay.io/minio/minio:latest
     container_name: minio_container
     command: server /data --console-address ":9001"
     environment:
