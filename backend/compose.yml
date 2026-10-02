@@ -37,7 +37,7 @@ services:
       - stud_net
 
   minio:
-    image: quay.io/minio/minio:latest
+    image: cgr.dev/chainguard/minio:latest
     container_name: minio
     command: server /data --console-address ":9001"
     environment:
