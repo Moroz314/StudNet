@@ -5,8 +5,13 @@ class WebSocketService {
     this.maxReconnectAttempts = 5
     this.reconnectInterval = 3000
     this.reconnectDelayMultiplier = 1.5
-    this.eventCallbacks = {}
-    this.baseURL = import.meta.env.VITE_WS_URL || 'ws://45.11.92.114:8000'
+    const defaultHost = (typeof window !== 'undefined' && window.location && window.location.hostname)
+      ? window.location.hostname
+      : '136.234.4.160';
+    const defaultProto = (typeof window !== 'undefined' && window.location && window.location.protocol === 'https:')
+      ? 'wss:'
+      : 'ws:';
+    this.baseURL = import.meta.env.VITE_WS_URL || `${defaultProto}//${defaultHost}:8000`;
     this.isManuallyDisconnecting = false
     this.currentUserId = null // Храним текущего пользователя
     this.lastConnectTime = 0

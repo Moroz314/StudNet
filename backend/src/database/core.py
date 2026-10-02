@@ -5,11 +5,11 @@ from sqlalchemy.orm import sessionmaker, Session
 
 load_dotenv()
 
-USER = os.getenv("DB_USER")
-PASSWORD = os.getenv("DB_PASSWORD")
-HOST = os.getenv("DB_HOST")
-PORT = os.getenv("DB_PORT")
-DB_NAME = os.getenv("DB_NAME")
+USER = os.getenv("DB_USER") or "postgres"
+PASSWORD = os.getenv("DB_PASSWORD") or "12345"
+HOST = os.getenv("DB_HOST") or "postgres"
+PORT = os.getenv("DB_PORT") or "5432"
+DB_NAME = os.getenv("DB_NAME") or "studnet"
 
 
 DATABASE_URL = f"postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{DB_NAME}"

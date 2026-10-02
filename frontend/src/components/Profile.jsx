@@ -7,8 +7,10 @@ import { authAPI, normalizeAssetUrl, profileAPI, projectsAPI } from '../services
 import { Link, useNavigate } from 'react-router-dom';
 import { websocketService } from '../services/websocket';
 
-const CLIENT_ID = 'Ov23lic2YCRXOp2ivNHk'
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://45.11.92.114:8000'
+const defaultHost = (typeof window !== 'undefined' && window.location && window.location.hostname)
+  ? window.location.hostname
+  : '136.234.4.160';
+const API_BASE_URL = import.meta.env.VITE_API_URL || `http://${defaultHost}:8000`;
 
 export default function Profile() {
   const [isGitHubLoading, setIsGitHubLoading] = useState(false);

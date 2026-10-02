@@ -1,7 +1,11 @@
 import axios from 'axios';
 
+const defaultHost = (typeof window !== 'undefined' && window.location && window.location.hostname)
+    ? window.location.hostname
+    : '136.234.4.160';
+
 const instance = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'http://45.11.92.114:8000'
+    baseURL: import.meta.env.VITE_API_URL || `http://${defaultHost}:8000`
 });
 
 instance.interceptors.request.use(async (config) => {

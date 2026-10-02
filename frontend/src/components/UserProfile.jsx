@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import Header from '../ui/Header'
 import { fetchViewedProfile, clearViewedProfile } from '../store/slices/viewedProfile';
 import { profileAPI } from '../services/api';
-import { FaGithub, FaTelegram, FaVk, FaInstagram, FaUniversity, FaBook, FaCode } from "react-icons/fa";
-
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://45.11.92.114:8000'
+const defaultHost = (typeof window !== 'undefined' && window.location && window.location.hostname)
+  ? window.location.hostname
+  : '136.234.4.160';
+const API_BASE_URL = import.meta.env.VITE_API_URL || `http://${defaultHost}:8000`;
 
 export default function UserProfile() {
   const { userId: urlUserId } = useParams();

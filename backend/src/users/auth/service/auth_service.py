@@ -11,23 +11,9 @@ from dotenv import load_dotenv
 from sqlalchemy.orm import Session
 from ....database.core import get_db
 from ....database.redis.redis_auth import RedisAuth
-from fastapi_mail import FastMail, ConnectionConfig
 from .email_service import EmailService
 
 load_dotenv()
-
-conf = ConnectionConfig(
-    MAIL_USERNAME=os.getenv("MAIL_USERNAME"),
-    MAIL_PASSWORD=os.getenv("MAIL_PASSWORD"),
-    MAIL_FROM=os.getenv("MAIL_USERNAME"),
-    MAIL_PORT=587,
-    MAIL_SERVER="smtp.gmail.com",
-    MAIL_STARTTLS=True,
-    MAIL_SSL_TLS=False,
-    USE_CREDENTIALS=True,
-)
-
-fast_mail = FastMail(conf)
 
 client_id = os.getenv("GITHUB_APP_ID")
 client_secret = os.getenv("GITHUB_APP_SECRET")

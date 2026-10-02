@@ -1,11 +1,12 @@
 import axios from 'axios';
 
-// В dev-режиме используем относительный baseURL.
-// Это важно, чтобы запросы уходили в Vite (и прокси в `vite.config.js` перенаправлял их на backend),
-// а не напрямую на `http://45.11.92.114:8000` (иначе снова будет CORS).
-const API_BASE_URL = 'http://45.11.92.114:8000';
+const defaultHost = (typeof window !== 'undefined' && window.location && window.location.hostname)
+  ? window.location.hostname
+  : '136.234.4.160';
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || `http://${defaultHost}:8000`;
 const MINIO_INTERNAL_ORIGIN = 'http://minio:9000';
-const MINIO_PUBLIC_ORIGIN = 'http://localhost:9100';
+const MINIO_PUBLIC_ORIGIN = import.meta.env.VITE_S3_PUBLIC_URL || `http://${defaultHost}:9100`;
 
 export const normalizeAssetUrl = (rawUrl) => {
   if (!rawUrl || typeof rawUrl !== 'string') return rawUrl;

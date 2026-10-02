@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Environment files
+.env
+backend/.env
+
+# Node / Frontend
+node_modules/
+dist/
+.npm/
+
+# IDE / Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker volumes (if mounted locally)
+postgres-data/
+minio-data/

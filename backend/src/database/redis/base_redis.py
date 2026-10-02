@@ -4,9 +4,9 @@ import redis.asyncio as redis
 
 load_dotenv()
 
-REDIS_HOST = os.getenv("REDIS_HOST")
-REDIS_PORT = os.getenv("REDIS_PORT")
-REDIS_PASSWORD = os.getenv("REDIS_PASSWORD")
+REDIS_HOST = os.getenv("REDIS_HOST") or "redis"
+REDIS_PORT = os.getenv("REDIS_PORT") or "6379"
+REDIS_PASSWORD = os.getenv("REDIS_PASSWORD") or None
 REDIS_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}"
 
 class RedisInit:

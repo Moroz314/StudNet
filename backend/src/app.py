@@ -23,7 +23,8 @@ app = FastAPI(lifespan=lifespan)
 # In production, specify allowed origins explicitly
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins for development
+    allow_origins=["*"],
+    allow_origin_regex=r"^https?://.*",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

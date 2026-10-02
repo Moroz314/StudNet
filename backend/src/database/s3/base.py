@@ -16,9 +16,9 @@ load_dotenv()
 logger = logging.getLogger(__name__)
 
 s3_config = {
-    'endpoint_url': os.getenv('S3_URL'),
-    'aws_access_key_id': os.getenv('AWS_ACCESS_KEY'),
-    'aws_secret_access_key': os.getenv('AWS_SECRET_KEY'),
+    'endpoint_url': os.getenv('S3_URL') or 'http://minio:9000',
+    'aws_access_key_id': os.getenv('AWS_ACCESS_KEY') or 'minioadmin',
+    'aws_secret_access_key': os.getenv('AWS_SECRET_KEY') or 'minioadmin',
     'region_name': 'us-east-1',
 }
 

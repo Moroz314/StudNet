@@ -7,7 +7,8 @@ import secrets
 
 load_dotenv()
 
-VERIFICATION_CODE_EXPIRE_MINUTES = float(os.getenv("VERIFICATION_CODE_EXPIRE_MINUTES"))
+_expire_val = os.getenv("VERIFICATION_CODE_EXPIRE_MINUTES")
+VERIFICATION_CODE_EXPIRE_MINUTES = float(_expire_val) if _expire_val else 15.0
 
 class RedisAuth(RedisInit):
     async def store_verification_data(self, email: str, user_data: dict, code: str) -> None:
