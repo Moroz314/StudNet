@@ -41,7 +41,7 @@ services:
       - stud_net
 
   minio:
-    image: cgr.dev/chainguard/minio:latest
+    image: elestio/minio:latest
     container_name: minio_container
     command: server /data --console-address ":9001"
     environment:
